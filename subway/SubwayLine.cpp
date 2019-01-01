@@ -6,10 +6,11 @@ SubwayLine::SubwayLine()
 {
 }
 
-SubwayLine::SubwayLine(string describe, vector<Station> &stations_,int Id)
+SubwayLine::SubwayLine(const char * name_)
 {
-
+	name = name_;
 }
+
 
 SubwayLine::~SubwayLine()
 {

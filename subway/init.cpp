@@ -1,24 +1,10 @@
 #include"init.h"
+#include"pch.h"
+#include"Graph.h"
+#include "Utility.h"
+#include "IO.h"
+using namespace std;
 
-Graph init(int city)
-{
-	switch (city)
-	{
-	case City::beijing:
-	{
-		makeGraph("beijing_subway.txt");
-		break;
-	}
-	case City::shanghai:
-	{
-
-		break;
-	}
-	default:
-		throw runtime_error("no_this_city");
-		break;
-	}
-}
 
 Graph makeGraph(const char* fileName)
 {
@@ -33,3 +19,25 @@ Graph makeGraph(const char* fileName)
 	}
 	return Graph(describes);
 }
+
+Graph init(int city)
+{
+	switch (city)
+	{
+	case City::beijing:
+	{
+		return makeGraph("beijing_subway.txt");
+		break;
+	}
+	case City::shanghai:
+	{
+
+		break;
+	}
+	default:
+		throw runtime_error("no_this_city");
+		break;
+	}
+}
+
+

@@ -2,15 +2,19 @@
 #include"pch.h"
 #include"SubwayLine.h"
 #include"Station.h"
+#include"LinkBetweenStation.h"
+using namespace std;
 
 class Graph
 {
 public:
-	Graph(vector<string>describes);
-	virtual ~Graph();
 	vector<SubwayLine>subwayLine;
 	vector<Station>stations;
-private:
+	vector<LinkBetweenStation>linkBetweenStation;
 
+	Graph(vector<string>describes);
+	virtual ~Graph();
+private:
+	int dealOneDescribe(string describe);
 };
 
