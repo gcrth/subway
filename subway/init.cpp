@@ -31,7 +31,7 @@ Graph init(int city)
 	}
 	case City::shanghai:
 	{
-
+		throw runtime_error("no_this_city");
 		break;
 	}
 	default:
