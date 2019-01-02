@@ -2,18 +2,17 @@
 #include"pch.h"
 #include"Station.h"
 #include"SubwayLine.h"
-using namespace std;
 
 class LinkBetweenStation
 {
 public:
-	Station*firstStation;
-	Station*secondStation;
-	vector<SubwayLine*>subwayLinePointer;
+	int firstStation;
+	int secondStation;
+	vector<int>subwayLinePointer;
 
 	LinkBetweenStation();
-	LinkBetweenStation(Station*firstStation_, Station*secondStation_,SubwayLine*subwayLinePointer_);
+	LinkBetweenStation(int firstStation_, int secondStation_,int subwayLinePointer_);
 	virtual ~LinkBetweenStation();
-	bool isEqual(Station*firstStation_, Station*secondStation_);
+	bool isEqual(int firstStation_, int secondStation_);
 };
 

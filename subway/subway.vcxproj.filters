@@ -27,9 +27,6 @@
     <ClInclude Include="Utility.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\soduku\soduku\IO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="SubwayLine.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -37,6 +34,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LinkBetweenStation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,9 +56,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\soduku\soduku\IO.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="SubwayLine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -66,6 +63,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LinkBetweenStation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IO.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

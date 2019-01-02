@@ -6,7 +6,7 @@ LinkBetweenStation::LinkBetweenStation()
 {
 }
 
-LinkBetweenStation::LinkBetweenStation(Station*firstStation_, Station*secondStation_, SubwayLine*subwayLinePointer_)
+LinkBetweenStation::LinkBetweenStation(int firstStation_, int secondStation_, int subwayLinePointer_)
 {
 	firstStation = firstStation_;
 	secondStation = secondStation_;
@@ -18,7 +18,7 @@ LinkBetweenStation::~LinkBetweenStation()
 {
 }
 
-bool LinkBetweenStation::isEqual(Station*firstStation_, Station*secondStation_)
+bool LinkBetweenStation::isEqual(int firstStation_, int secondStation_)
 {
 	return ((((firstStation) == firstStation_) &&
 		((secondStation) == secondStation_)) ||

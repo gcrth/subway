@@ -3,7 +3,6 @@
 #include"SubwayLine.h"
 #include"Station.h"
 #include"LinkBetweenStation.h"
-using namespace std;
 
 class Graph
 {

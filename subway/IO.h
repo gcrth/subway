@@ -1,4 +1,8 @@
 #pragma once
+#include "pch.h"
+#include <iostream>
+#include <string.h>
+
 class InFile
 {
 private:
@@ -28,3 +32,4 @@ public:
 	int close();
 	~OutFile(void);
 };
+

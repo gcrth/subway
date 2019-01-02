@@ -1,6 +1,4 @@
-#include "pch.h"
-#include <iostream>
-#include <string.h>
+#include"pch.h"
 #include "IO.h"
 
 InFile::InFile(void)
