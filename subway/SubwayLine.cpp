@@ -6,7 +6,7 @@ SubwayLine::SubwayLine()
 {
 }
 
-SubwayLine::SubwayLine(const char * name_)
+SubwayLine::SubwayLine(const wchar_t * name_)
 {
 	name = name_;
 }

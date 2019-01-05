@@ -5,13 +5,13 @@
 class Station
 {
 public:
-	string name;
+	wstring name;
 	vector <int> subwayLinePointer;
-
+	vector<int>linkBetweenStation;
 	Station();
-	Station(const char * name_);
+	Station(const wchar_t * name_);
 	virtual ~Station();
-	bool isEqual(const char *name_);
+	bool isEqual(const wchar_t *name_);
 	
 };
 

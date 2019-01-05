@@ -28,9 +28,9 @@ bool InFile::open()
 	return (fp != NULL);
 }
 
-char *InFile::gets(char *des, int n)
+wchar_t *InFile::gets(wchar_t *des, int n)
 {
-	return fgets(des, n, fp);
+	return fgetws(des, n, fp);
 }
 
 int InFile::close()

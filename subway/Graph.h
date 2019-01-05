@@ -11,9 +11,10 @@ public:
 	vector<Station>stations;
 	vector<LinkBetweenStation>linkBetweenStation;
 
-	Graph(vector<string>describes);
+	Graph(vector<wstring>describes);
+	Graph();
 	virtual ~Graph();
 private:
-	int dealOneDescribe(string describe);
+	int dealOneDescribe(wstring describe);
 };
 

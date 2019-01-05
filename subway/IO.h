@@ -13,7 +13,7 @@ public:
 	InFile(const char desroute[]);
 	bool bind(const char desroute[]);
 	bool open();
-	char *gets(char *des, int n = 18);
+	wchar_t *gets(wchar_t *des, int n = 18);
 	int close();
 	~InFile(void);
 };

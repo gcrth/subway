@@ -6,7 +6,7 @@ Station::Station()
 {
 }
 
-Station::Station(const char* name_)
+Station::Station(const wchar_t* name_)
 {
 	name = name_;
 }
@@ -15,7 +15,7 @@ Station::~Station()
 {
 }
 
-bool Station::isEqual(const char *name_)
+bool Station::isEqual(const wchar_t *name_)
 {
-	return strcmp(name.c_str(), name_) == 0;
+	return name == wstring(name_);
 }

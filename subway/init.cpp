@@ -10,12 +10,12 @@ Graph makeGraph(const char* fileName)
 {
 	InFile inFile(fileName);
 	if (!inFile.open())throw runtime_error("unable_to_open_file");
-	char inBuf[1000];
-	vector<string>describes;
+	wchar_t inBuf[100000];
+	vector<wstring>describes;
 	for (int i = 0;; i++)
 	{
 		if (inFile.gets(inBuf, sizeof(inBuf)) == NULL)break;
-		describes.push_back(string(inBuf));
+		describes.push_back(wstring(inBuf));
 	}
 	return Graph(describes);
 }

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Graph.h"
 
-Graph::Graph(vector<string>describes)
+Graph::Graph(vector<wstring>describes)
 {
 	for (int i = 0; i < describes.size(); i++)
 	{
@@ -9,21 +9,29 @@ Graph::Graph(vector<string>describes)
 	}
 }
 
-int Graph::dealOneDescribe(string describe)
-{
-	char * tokenPointer;
-	vector<string>token;
-	char * describeStr = new char[describe.size()];
-	strcpy(describeStr, describe.c_str());
+Graph::Graph(){}
 
-	tokenPointer = strtok(describeStr, "\t");
+int Graph::dealOneDescribe(wstring describe)
+{
+	wchar_t * tokenPointer;
+	vector<wstring>token;
+	wchar_t * describeStr = new wchar_t[describe.size()+1];
+	wcscpy(describeStr, describe.c_str());
+	bool onWay(false);
+
+	tokenPointer = wcstok(describeStr, L"\t");
 	subwayLine.push_back(SubwayLine(tokenPointer));
-	tokenPointer = strtok(NULL, "\t");
+	if (subwayLine.back().name.back() == '*')
+	{
+		onWay = true;
+		subwayLine.back().name.pop_back();
+	}
+	tokenPointer = wcstok(NULL, L"\t");
 
 	while (tokenPointer)
 	{
-		token.push_back(string(tokenPointer));
-		tokenPointer = strtok(NULL, "\t");
+		token.push_back(wstring(tokenPointer));
+		tokenPointer = wcstok(NULL, L"\t");
 	}
 
 	int lastStation;
@@ -36,7 +44,7 @@ int Graph::dealOneDescribe(string describe)
 
 		for (int j = 0; j < stations.size(); j++)
 		{
-			if (stations[j].isEqual(token[j].c_str()))
+			if (stations[j].isEqual(token[i].c_str()))
 			{
 				isExist = true;
 				stationNo = j;
@@ -73,17 +81,41 @@ int Graph::dealOneDescribe(string describe)
 			if (isExist)
 			{
 				linkBetweenStation[linkNo].subwayLinePointer.push_back(subwayLine.size() - 1);
+				stations[lastStation].linkBetweenStation.push_back(linkNo);
 			}
 			else
 			{
 				linkBetweenStation.push_back(LinkBetweenStation(lastStation, thisStation, subwayLine.size() - 1));
+				stations[lastStation].linkBetweenStation.push_back(linkBetweenStation.size()-1);
+			}
+			if (!onWay)
+			{
+				for (int j = 0; j < linkBetweenStation.size(); j++)
+				{
+					if (linkBetweenStation[j].isEqual(thisStation, lastStation))
+					{
+						isExist = true;
+						linkNo = j;
+						break;
+					}
+				}
+				if (isExist)
+				{
+					linkBetweenStation[linkNo].subwayLinePointer.push_back(subwayLine.size() - 1);
+					stations[thisStation].linkBetweenStation.push_back(linkNo);
+				}
+				else
+				{
+					linkBetweenStation.push_back(LinkBetweenStation(thisStation,lastStation, subwayLine.size() - 1));
+					stations[thisStation].linkBetweenStation.push_back(linkBetweenStation.size() - 1);
+				}
 			}
 		}
 		lastStation = thisStation;
 	}
 
 	//»·Ïß
-	if (token.back() == "1")
+	if (token.back() == L"1")
 	{
 		bool isExist = false;
 		int linkNo(0);
@@ -100,14 +132,35 @@ int Graph::dealOneDescribe(string describe)
 		if (isExist)
 		{
 			linkBetweenStation[linkNo].subwayLinePointer.push_back(subwayLine.size() - 1);
+			stations[lastStation].linkBetweenStation.push_back(linkNo);
 		}
 		else
 		{
 			linkBetweenStation.push_back(LinkBetweenStation(lastStation, thisStation, subwayLine.size() - 1));
+			stations[lastStation].linkBetweenStation.push_back(linkBetweenStation.size() - 1);
+		}
+		for (int j = 0; j < linkBetweenStation.size(); j++)
+		{
+			if (linkBetweenStation[j].isEqual(thisStation, lastStation))
+			{
+				isExist = true;
+				linkNo = j;
+				break;
+			}
+		}
+		if (isExist)
+		{
+			linkBetweenStation[linkNo].subwayLinePointer.push_back(subwayLine.size() - 1);
+			stations[thisStation].linkBetweenStation.push_back(linkNo);
+		}
+		else
+		{
+			linkBetweenStation.push_back(LinkBetweenStation(thisStation, lastStation, subwayLine.size() - 1));
+			stations[thisStation].linkBetweenStation.push_back(linkBetweenStation.size() - 1);
 		}
 	}
 
-	delete[] describeStr;
+	delete [] describeStr;
 	return 0;
 }
 

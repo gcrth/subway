@@ -5,11 +5,11 @@
 class SubwayLine
 {
 public:
-	string name;
+	wstring name;
 	vector<int>stationsPointer;
 
 	SubwayLine();
-	SubwayLine(const char * name_);
+	SubwayLine(const wchar_t * name_);
 	virtual ~SubwayLine();
 
 };

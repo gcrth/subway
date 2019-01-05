@@ -21,7 +21,8 @@ LinkBetweenStation::~LinkBetweenStation()
 bool LinkBetweenStation::isEqual(int firstStation_, int secondStation_)
 {
 	return ((((firstStation) == firstStation_) &&
-		((secondStation) == secondStation_)) ||
+		((secondStation) == secondStation_)) );
+	/*||
 		(((firstStation) == secondStation_) &&
-		((secondStation) == firstStation_)));
+		((secondStation) == firstStation_))*/
 }
