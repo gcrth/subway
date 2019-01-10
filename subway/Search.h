@@ -31,6 +31,7 @@ struct Route
 		steps.emplace_back(stepType::transform,subWayLine);
 		location = from;
 		theLineNowTake = subWayLine;
+		cost = 0;
 	}
 	Route()
 	{
@@ -50,8 +51,8 @@ public:
 class Search
 {
 public:
-	Search(wstring from_, wstring to_, Graph graph_,int costOfTransform_);
-	Search(wstring from_, Graph graph_,int costOfTransform_);
+	Search(wstring from_, wstring to_, Graph& graph_,int costOfTransform_);
+	Search(wstring from_, Graph& graph_,int costOfTransform_);
 	Route SearchThePath();
 	Route SearchTheTraversal();
 	virtual ~Search();
@@ -63,7 +64,7 @@ public:
 	wstring toString;
 	int from;
 	int to;
-	Graph&graph;
+	Graph& graph;
 	int costOfTransform=0;
 	Route result;
 	priority_queue<Route, vector<Route>, Compare> route;

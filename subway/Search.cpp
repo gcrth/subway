@@ -7,7 +7,7 @@ Search::~Search()
 {
 }
 
-Search::Search(wstring from_, wstring to_, Graph graph_,int costOfTransform_) :graph(graph_)
+Search::Search(wstring from_, wstring to_, Graph &graph_,int costOfTransform_) :graph(graph_)
 {
 	costOfTransform = costOfTransform_;
 	fromString = from_;
@@ -31,7 +31,7 @@ Search::Search(wstring from_, wstring to_, Graph graph_,int costOfTransform_) :g
 
 }
 
-Search::Search(wstring from_, Graph graph_,int costOfTransform_) :graph(graph_)
+Search::Search(wstring from_, Graph &graph_,int costOfTransform_) :graph(graph_)
 {
 	costOfTransform = costOfTransform_;
 	fromString = from_;
@@ -66,9 +66,10 @@ Route Search::SearchThePath()
 			bool isOnThisLine = false;
 			for (int j = 0; j < graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer.size(); j++)
 			{
-				if (graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer[i] == x.theLineNowTake)
+				if (graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer[j] == x.theLineNowTake)
 				{
 					isOnThisLine = true;
+					break;
 				}
 			}
 			if (!isOnThisLine)continue;
@@ -76,7 +77,7 @@ Route Search::SearchThePath()
 			bool isVisited = false;
 			for (int j = 0; j < x.reachedStations.size(); j++)
 			{
-				if (x.reachedStations[i] == station)
+				if (x.reachedStations[j] == station)
 				{
 					isVisited = true;
 					break;
@@ -85,6 +86,7 @@ Route Search::SearchThePath()
 			if (!isVisited)
 			{
 				Route y(x);
+				y.reachedStations.push_back(station);
 				y.location = station;
 				y.steps.emplace_back(stepType::nextStaiton, station);
 				route.push(y);
@@ -121,7 +123,7 @@ Route Search::SearchTheTraversal()
 			bool isOnThisLine = false;
 			for (int j = 0; j < graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer.size(); j++)
 			{
-				if (graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer[i] == x.theLineNowTake)
+				if (graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer[j] == x.theLineNowTake)
 				{
 					isOnThisLine = true;
 				}
