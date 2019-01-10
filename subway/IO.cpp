@@ -4,6 +4,7 @@
 InFile::InFile(void)
 {
 	strcpy(route, "");
+	open();
 }
 
 InFile::InFile(const char desroute[])
@@ -52,6 +53,7 @@ OutFile::OutFile(void)
 OutFile::OutFile(const char desroute[])
 {
 	strcpy(route, desroute);
+	open();
 }
 
 bool OutFile::bind(const char desroute[])
@@ -70,9 +72,9 @@ bool OutFile::open()
 	return (fp != NULL);
 }
 
-int OutFile::puts(const char *sou)
+int OutFile::puts(const wchar_t *sou)
 {
-	return fputs(sou, fp);
+	return fputws(sou, fp);
 
 }
 

@@ -11,14 +11,31 @@ enum stepType
 struct Step
 {
 	stepType type;
-	string name;
+	int action;
+	Step(stepType type_,int action_)
+	{
+		type = type_;
+		 action = action_;
+	}
 };
 
 struct Route
 {
 	vector<Step>steps;
 	int cost;
+	vector<int>reachedStations;
+	int location;
+	int theLineNowTake;
+	Route(int subWayLine,int from)
+	{
+		steps.emplace_back(stepType::transform,subWayLine);
+		location = from;
+		theLineNowTake = subWayLine;
+	}
+	Route()
+	{
 
+	}
 };
 
 class Compare
@@ -33,16 +50,28 @@ public:
 class Search
 {
 public:
-	Search();
-	Search(wstring from_, wstring to_);
-	Search(wstring from_);
-	int SearchThePath();
-	int SearchTheTraversal();
+	Search(wstring from_, wstring to_, Graph graph_,int costOfTransform_);
+	Search(wstring from_, Graph graph_,int costOfTransform_);
+	Route SearchThePath();
+	Route SearchTheTraversal();
 	virtual ~Search();
+	wstring findThePath();
+	wstring findTheTraversal();
+	wstring findTheTraversalSimple();
 
-	wstring from;
-	wstring to;
-	
+	wstring fromString;
+	wstring toString;
+	int from;
+	int to;
+	Graph&graph;
+	int costOfTransform=0;
+	Route result;
 	priority_queue<Route, vector<Route>, Compare> route;
+
+private:
+	bool isArrived(Route x);
+	bool isAllReached(Route x);
+	wstring outPut();
+	wstring simpleOutPut();
 };
 
