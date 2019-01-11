@@ -21,11 +21,7 @@ int Graph::dealOneDescribe(wstring describe)
 
 	tokenPointer = wcstok(describeStr, L"\t");
 	subwayLine.push_back(SubwayLine(tokenPointer));
-	if (subwayLine.back().name.back() == '*')
-	{
-		onWay = true;
-		subwayLine.back().name.pop_back();
-	}
+	
 	tokenPointer = wcstok(NULL, L"\t");
 
 	while (tokenPointer)
@@ -39,6 +35,11 @@ int Graph::dealOneDescribe(wstring describe)
 
 	for (int i = 0; i < token.size() - 1; i++)
 	{
+		if (token[i].back() == L'*')
+		{
+			onWay = true;
+			token[i].pop_back();
+		}
 		bool isExist(false);
 		int stationNo(0);
 
@@ -115,7 +116,7 @@ int Graph::dealOneDescribe(wstring describe)
 	}
 
 	//»·Ïß
-	if (token.back() == L"1")
+	if (token.back() == L"1\n")
 	{
 		bool isExist = false;
 		int linkNo(0);

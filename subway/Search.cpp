@@ -86,16 +86,18 @@ Route Search::SearchThePath()
 			if (!isVisited)
 			{
 				Route y(x);
+				y.cost++;
 				y.reachedStations.push_back(station);
 				y.location = station;
 				y.steps.emplace_back(stepType::nextStaiton, station);
-				route.push(y);
+				route.push(Route(y));
+				y.cost += costOfTransform;
 				for (int k = 0; k < graph.stations[station].subwayLinePointer.size(); k++)
 				{
 					if (graph.stations[station].subwayLinePointer[k] == x.theLineNowTake)continue;
 					y.steps.emplace_back(stepType::transform, graph.stations[station].subwayLinePointer[k]);
 					y.theLineNowTake = graph.stations[station].subwayLinePointer[k];
-					route.push(y);
+					route.push(Route(y));
 					y.steps.pop_back();
 				}
 			}
@@ -108,12 +110,14 @@ Route Search::SearchTheTraversal()
 {
 	for (int i = 0; i < graph.stations[from].subwayLinePointer.size(); i++)
 	{
-		route.emplace(graph.stations[from].subwayLinePointer[i], from);
+		route_a.emplace(graph.stations[from].subwayLinePointer[i], from);
 	}
 	while (true)
 	{
-		Route x(route.top());
-		route.pop();
+		Route x(route_a.top());
+		//result = x;
+		//wcout << outPut();
+		route_a.pop();
 		if (isAllReached(x))
 		{
 			return x;
@@ -131,17 +135,27 @@ Route Search::SearchTheTraversal()
 			if (!isOnThisLine)continue;
 			int station = graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].secondStation;
 			Route y(x);
-			y.cost;
+			y.cost++;
+			bool isVisited = false;
+			for (int j = 0; j < y.reachedStations.size(); j++)
+			{
+				if (y.reachedStations[j] == station)
+				{
+					isVisited = true;
+					break;
+				}
+			}
+			if(!isVisited)y.reachedStations.push_back(station);
 			y.location = station;
 			y.steps.emplace_back(stepType::nextStaiton, station);
-			route.push(y);
+			route_a.push(Route(y));
 			y.cost += costOfTransform;
 			for (int k = 0; k < graph.stations[station].subwayLinePointer.size(); k++)
 			{
 				if (graph.stations[station].subwayLinePointer[k] == x.theLineNowTake)continue;
 				y.steps.emplace_back(stepType::transform, graph.stations[station].subwayLinePointer[k]);
 				y.theLineNowTake = graph.stations[station].subwayLinePointer[k];
-				route.push(y);
+				route_a.push(Route(y));
 				y.steps.pop_back();
 			}
 		}
@@ -178,6 +192,10 @@ wstring Search::findTheTraversal()
 wstring Search::outPut()
 {
 	wstring resultString;
+	wchar_t cost[10000];
+	_itow(result.cost, cost, 10);
+	resultString += wstring(cost);
+	resultString += L"\n";
 	for (int i = 0; i < result.steps.size(); i++)
 	{
 		if (result.steps[i].type == stepType::transform)
