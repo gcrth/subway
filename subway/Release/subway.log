@@ -1,0 +1,37 @@
+﻿  Search.cpp
+c:\users\gcrth\source\repos\subway\subway\search.cpp(17): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(39): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(52): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(64): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(67): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(78): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(95): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(112): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(136): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(139): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(150): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(166): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(179): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(195): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(212): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(228): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(265): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\search.cpp(299): warning C4018: “<”: 有符号/无符号不匹配
+  subway.cpp
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(77): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(85): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(154): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(157): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(232): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(236): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(258): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(272): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(293): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(307): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\gcrth\source\repos\subway\subway\subway.cpp(344): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码
+  244 of 1018 functions (24.0%) were compiled, the rest were copied from previous compilation.
+    182 functions were new in current compilation
+    217 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  subway.vcxproj -> C:\Users\gcrth\source\repos\subway\Release\subway.exe
