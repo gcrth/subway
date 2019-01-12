@@ -10,5 +10,5 @@ public:
 
 enum City
 {
-	beijing,shanghai
+	beijing,shanghai,small_beijing
 };

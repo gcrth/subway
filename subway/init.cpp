@@ -31,12 +31,19 @@ Graph init(int city)
 	}
 	case City::shanghai:
 	{
-		return makeGraph("subway.txt");
+		return makeGraph("shanghai_subway.txt");
+		break;
+	}
+	case City::small_beijing:
+	{
+		return makeGraph("small_beijing_subway.txt");
 		break;
 	}
 	default:
+	{
 		throw runtime_error("no_this_city");
 		break;
+	}
 	}
 }
 

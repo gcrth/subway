@@ -27,7 +27,7 @@ Search::Search(wstring from_, wstring to_, Graph &graph_,int costOfTransform_) :
 			if (from != -1)break;
 		}
 	}
-	if (from == -1 || to == -1)throw invalid_argument("no_such_city");
+	if (from == -1 || to == -1)throw invalid_argument("no_such_station");
 
 }
 
@@ -213,20 +213,29 @@ wstring Search::outPut()
 	return resultString;
 }
 
-wstring Search::findTheTraversalSimple()
+wstring Search::findTheTraversalForGUI()
 {
 	result = SearchTheTraversal();
-	return simpleOutPut();
+	return outPutForGUI();
 }
 
-wstring Search::simpleOutPut()
+wstring Search::findThePathForGUI()
+{
+	result = SearchThePath();
+	return outPutForGUI();
+}
+
+wstring Search::outPutForGUI()
 {
 	wstring resultString;
+
+	resultString += graph.stations[from].name;
+	resultString += L"\n";
 	for (int i = 0; i < result.steps.size(); i++)
 	{
 		if (result.steps[i].type == stepType::transform)
 		{
-			
+			continue;
 		}
 		else
 		{

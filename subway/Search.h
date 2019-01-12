@@ -68,7 +68,8 @@ public:
 	virtual ~Search();
 	wstring findThePath();
 	wstring findTheTraversal();
-	wstring findTheTraversalSimple();
+	wstring findTheTraversalForGUI();
+	wstring findThePathForGUI();
 
 	wstring fromString;
 	wstring toString;
@@ -84,6 +85,6 @@ private:
 	bool isArrived(Route x);
 	bool isAllReached(Route x);
 	wstring outPut();
-	wstring simpleOutPut();
+	wstring outPutForGUI();
 };
 
