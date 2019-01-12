@@ -86,5 +86,6 @@ private:
 	bool isAllReached(Route x);
 	wstring outPut();
 	wstring outPutForGUI();
+	Route findTheShortestUntouchedPoint(Route route);
 };
 
