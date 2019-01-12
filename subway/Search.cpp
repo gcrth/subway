@@ -115,6 +115,7 @@ Route Search::findTheShortestUntouchedPoint(Route route)
 		{
 			Route x(route);
 			x.reachedStations.clear();
+			x.reachedStations.push_back(x.location);
 			routeSet.push(x);
 		}
 		else
@@ -124,6 +125,7 @@ Route Search::findTheShortestUntouchedPoint(Route route)
 			x.cost += costOfTransform;
 			x.theLineNowTake = graph.stations[route.location].subwayLinePointer[i];
 			x.reachedStations.clear();
+			x.reachedStations.push_back(x.location);
 			routeSet.push(x);
 		}
 	}
@@ -160,22 +162,20 @@ Route Search::findTheShortestUntouchedPoint(Route route)
 				y.reachedStations.push_back(station);
 				y.location = station;
 				y.steps.emplace_back(stepType::nextStaiton, station);
-				vector<int>temp(y.reachedStations);
+				
 				for (int k = 0; k < route.reachedStations.size(); k++)
 				{
-					temp.push_back(route.reachedStations[i]);
+					y.reachedStations.push_back(route.reachedStations[k]);
 				}
-				vector<int>::iterator end = unique(temp.begin(), temp.end());
-				y.reachedStations.clear();
-				for (auto i = temp.begin(); i !=end; i++)
-				{
-					y.reachedStations.push_back(*i);
-				}
+				sort(y.reachedStations.begin(), y.reachedStations.end());
+				vector<int>::iterator new_end;
+				new_end = std::unique(y.reachedStations.begin(), y.reachedStations.end());
+				y.reachedStations.erase(new_end, y.reachedStations.end());
 				return y;
 			}
 			else
 			{
-				bool isVisited = false;
+				isVisited = false;
 				for (int j = 0; j < x.reachedStations.size(); j++)
 				{
 					if (x.reachedStations[j] == station)
@@ -184,10 +184,12 @@ Route Search::findTheShortestUntouchedPoint(Route route)
 						break;
 					}
 				}
+				if (isVisited)continue;
 				Route y(x);
 				y.cost++;
 				y.location = station;
 				y.steps.emplace_back(stepType::nextStaiton, station);
+				y.reachedStations.push_back(station);
 				routeSet.push(Route(y));
 				y.cost += costOfTransform;
 				for (int k = 0; k < graph.stations[station].subwayLinePointer.size(); k++)
@@ -205,58 +207,20 @@ Route Search::findTheShortestUntouchedPoint(Route route)
 
 Route Search::SearchTheTraversal()
 {
-	for (int i = 0; i < graph.stations[from].subwayLinePointer.size(); i++)
+	Route xbest;
+	int cost = 0xffffff;
+	for (int k = 0; k < graph.stations[from].subwayLinePointer.size(); k++)
 	{
-		route_a.emplace(graph.stations[from].subwayLinePointer[i], from);
-	}
-	while (true)
-	{
-		Route x(route_a.top());
-		//result = x;
-		//wcout << outPut();
-		route_a.pop();
-		if (isAllReached(x))
+		Route x(graph.stations[from].subwayLinePointer[k], from);
+		while (!isAllReached(x))
 		{
-			return x;
+			x = findTheShortestUntouchedPoint(x);
 		}
-		for (int i = 0; i < graph.stations[x.location].linkBetweenStation.size(); i++)
-		{
-			bool isOnThisLine = false;
-			for (int j = 0; j < graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer.size(); j++)
-			{
-				if (graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].subwayLinePointer[j] == x.theLineNowTake)
-				{
-					isOnThisLine = true;
-				}
-			}
-			if (!isOnThisLine)continue;
-			int station = graph.linkBetweenStation[graph.stations[x.location].linkBetweenStation[i]].secondStation;
-			Route y(x);
-			y.cost++;
-			bool isVisited = false;
-			for (int j = 0; j < y.reachedStations.size(); j++)
-			{
-				if (y.reachedStations[j] == station)
-				{
-					isVisited = true;
-					break;
-				}
-			}
-			if (!isVisited)y.reachedStations.push_back(station);
-			y.location = station;
-			y.steps.emplace_back(stepType::nextStaiton, station);
-			route_a.push(Route(y));
-			y.cost += costOfTransform;
-			for (int k = 0; k < graph.stations[station].subwayLinePointer.size(); k++)
-			{
-				if (graph.stations[station].subwayLinePointer[k] == x.theLineNowTake)continue;
-				y.steps.emplace_back(stepType::transform, graph.stations[station].subwayLinePointer[k]);
-				y.theLineNowTake = graph.stations[station].subwayLinePointer[k];
-				route_a.push(Route(y));
-				y.steps.pop_back();
-			}
-		}
+		x.reachedStations.erase(x.reachedStations.begin() + from);
+		x = findTheShortestUntouchedPoint(x);
+		if (x.cost < cost)xbest=x;
 	}
+	return xbest;
 }
 
 bool Search::isArrived(Route x)
@@ -270,7 +234,10 @@ bool Search::isArrived(Route x)
 
 bool Search::isAllReached(Route x)
 {
-	if (x.reachedStations.size() == graph.stations.size())return true;
+	if (x.reachedStations.size() == graph.stations.size())
+	{
+		return true;
+	}
 	return false;
 }
 

@@ -49,15 +49,6 @@ public:
 	}
 };
 
-class Compare_a
-{
-public:
-	bool operator()(Route left, Route right) const
-	{
-		return ((left.cost +right.reachedStations.size() )>(right.cost+ left.reachedStations.size() ));
-	}
-};
-
 class Search
 {
 public:
@@ -79,7 +70,6 @@ public:
 	int costOfTransform=0;
 	Route result;
 	priority_queue<Route, vector<Route>, Compare> route;
-	priority_queue<Route, vector<Route>, Compare_a> route_a;
 
 private:
 	bool isArrived(Route x);
