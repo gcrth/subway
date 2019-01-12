@@ -7,7 +7,7 @@ Search::~Search()
 {
 }
 
-Search::Search(wstring from_, wstring to_, Graph &graph_,int costOfTransform_) :graph(graph_)
+Search::Search(wstring from_, wstring to_, Graph &graph_, int costOfTransform_) :graph(graph_)
 {
 	costOfTransform = costOfTransform_;
 	fromString = from_;
@@ -21,7 +21,7 @@ Search::Search(wstring from_, wstring to_, Graph &graph_,int costOfTransform_) :
 			from = i;
 			if (to != -1)break;
 		}
-		else if (graph.stations[i].isEqual(toString.c_str()))
+		if (graph.stations[i].isEqual(toString.c_str()))
 		{
 			to = i;
 			if (from != -1)break;
@@ -31,7 +31,7 @@ Search::Search(wstring from_, wstring to_, Graph &graph_,int costOfTransform_) :
 
 }
 
-Search::Search(wstring from_, Graph &graph_,int costOfTransform_) :graph(graph_)
+Search::Search(wstring from_, Graph &graph_, int costOfTransform_) :graph(graph_)
 {
 	costOfTransform = costOfTransform_;
 	fromString = from_;
@@ -44,7 +44,7 @@ Search::Search(wstring from_, Graph &graph_,int costOfTransform_) :graph(graph_)
 			break;
 		}
 	}
-	if (from == -1)throw invalid_argument("no_such_city");
+	if (from == -1)throw invalid_argument("no_such_station");
 }
 
 Route Search::SearchThePath()
@@ -145,7 +145,7 @@ Route Search::SearchTheTraversal()
 					break;
 				}
 			}
-			if(!isVisited)y.reachedStations.push_back(station);
+			if (!isVisited)y.reachedStations.push_back(station);
 			y.location = station;
 			y.steps.emplace_back(stepType::nextStaiton, station);
 			route_a.push(Route(y));
@@ -196,12 +196,13 @@ wstring Search::outPut()
 	_itow(result.cost, cost, 10);
 	resultString += wstring(cost);
 	resultString += L"\n";
+	resultString += graph.stations[from].name;
+	resultString += L"\n";
 	for (int i = 0; i < result.steps.size(); i++)
 	{
 		if (result.steps[i].type == stepType::transform)
 		{
-			if(i!=0)resultString += L"»»³Ë ";
-			else resultString += L"³Ë×ø ";
+			resultString += L"³Ë×ø ";
 			resultString += graph.subwayLine[result.steps[i].action].name;
 		}
 		else
